@@ -139,7 +139,7 @@ const ViewCourse = () => {
       {/* FOOTER */}
       <div>
         <Link
-          to="/instructor/edit-course"
+          to="/instructor/manage-course"
           className="text-sm text-gray-500 hover:underline"
         >
           ← Back to Manage Courses

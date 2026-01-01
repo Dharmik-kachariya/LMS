@@ -9,7 +9,6 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       const res = await api.post("/users/logout");
-
       if (res.data.success) {
         logout();
         navigate("/login");
@@ -32,8 +31,9 @@ export default function Navbar() {
             LMS
           </Link>
 
-          {/* Navigation Links */}
           <div className="flex items-center gap-4">
+
+            {/* ===== COMMON LINK ===== */}
             <Link
               to="/"
               className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
@@ -41,95 +41,52 @@ export default function Navbar() {
               Home
             </Link>
 
-            <Link
-              to="/about"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              About Us
-            </Link>
+            {/* ===== INSTRUCTOR VIEW ===== */}
+            {user?.role === "instructor" && (
+              <>
+                <Link
+                  to="/profile"
+                  className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
+                >
+                  Profile
+                </Link>
 
-            <Link
-              to="/contact"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              Contact Us
-            </Link>
-
-            <Link
-              to="/careers"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              Careers
-            </Link>
-
-              <Link
-              to="/blog"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              Blog
-            </Link>
-
-            <Link
-              to="/blogdetail"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              Blog-Details
-            </Link>
-
-            <Link
-              to="/pricing"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              Pricing
-            </Link>
-
-            
-            <Link
-              to="/faq"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              FAQ
-            </Link>
-
-            <Link
-              to="/testimonials"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              Testimonials
-            </Link>
-
-            <Link
-              to="/profile"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-            >
-              Profile
-            </Link>
-
-
-            {user && user.role === "instructor" && (
-              <Link
-                to="/instructor/dashboard"
-                className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-              >
-                Instructor Dashboard
-              </Link>
+                <Link
+                  to="/instructor/dashboard"
+                  className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
+                >
+                  Instructor Dashboard
+                </Link>
+              </>
             )}
 
-            {user && user.role === "student" && (
-              <Link
-                to="/student/dashboard"
-                className="px-3 py-2 rounded-lg text-sm font-semibold text-white hover:bg-gray-800"
-              >
-                Student Dashboard
-              </Link>
+            {/* ===== STUDENT / GUEST VIEW ===== */}
+            {(!user || user.role === "student") && (
+              <>
+                <Link to="/about" className="nav-link">About Us</Link>
+                <Link to="/contact" className="nav-link">Contact Us</Link>
+                <Link to="/careers" className="nav-link">Careers</Link>
+                <Link to="/blog" className="nav-link">Blog</Link>
+                <Link to="/pricing" className="nav-link">Pricing</Link>
+                <Link to="/faq" className="nav-link">FAQ</Link>
+                <Link to="/testimonials" className="nav-link">Testimonials</Link>
+
+                {user?.role === "student" && (
+                  <Link
+                    to="/student/dashboard"
+                    className="nav-link"
+                  >
+                    Student Dashboard
+                  </Link>
+                )}
+              </>
             )}
 
-            {/* Auth Buttons */}
+            {/* ===== AUTH BUTTONS ===== */}
             {user ? (
               <button
                 onClick={handleLogout}
-                className="px-5 py-2 rounded-lg text-sm font-semibold
-                           bg-red-600 text-white hover:bg-red-700"
+                className="px-5 py-2 rounded-lg text-sm font-semibold bg-red-600 text-white hover:bg-red-700"
               >
                 Logout
               </button>
@@ -137,25 +94,24 @@ export default function Navbar() {
               <>
                 <Link
                   to="/login"
-                  className="px-5 py-2 rounded-lg text-sm font-semibold
-                             bg-gray-800 text-white border border-gray-700"
+                  className="px-5 py-2 rounded-lg text-sm font-semibold bg-gray-800 text-white border border-gray-700"
                 >
                   Login
                 </Link>
 
                 <Link
                   to="/register"
-                  className="px-5 py-2 rounded-lg text-sm font-semibold
-                             bg-cyan-600 text-white"
+                  className="px-5 py-2 rounded-lg text-sm font-semibold bg-cyan-600 text-white"
                 >
                   Register
                 </Link>
               </>
             )}
-          </div>
 
+          </div>
         </div>
       </div>
     </nav>
   );
 }
+  
