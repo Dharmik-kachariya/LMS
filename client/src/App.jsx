@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar.jsx";
-import Login from "./pages/auth/login.jsx";
+import Login from "./pages/auth/login.jsx";   
 import Register from "./pages/auth/register.jsx";
 import InstructorDashboard from "./pages/instructor/dashbord.jsx";
 import CreateCourse from "./pages/instructor/createcourse.jsx";
@@ -13,7 +13,6 @@ import Blog from "./pages/public/blog.jsx";
 import BlogDetail from "./pages/public/blogDetail.jsx";
 import Pricing from "./pages/public/pricing.jsx";
 import FAQ from "./pages/public/faq.jsx";
-import Testimonials from "./pages/public/testimonials.jsx";
 import Footer from "./components/footer.jsx";
 import ManageCourses from "./pages/instructor/managecourse.jsx";
 import EditCourse from "./pages/instructor/editCourse.jsx";
@@ -39,7 +38,6 @@ function App() {
         <Route path="/blogdetail" element={<BlogDetail />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/course/:courseId" element={<ViewCourse />} />
         <Route path="/instructor/manage-course" element={<ManageCourses />} />
         <Route path="/instructor/edit-course/:courseId" element={<EditCourse />} />
